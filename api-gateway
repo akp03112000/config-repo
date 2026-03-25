@@ -9,7 +9,7 @@ spring:
     gateway:
       routes:
         - id: auth-service
-          uri: lb://auth-service        # "lb://" tells Gateway to look up Eureka
+          uri: lb://auth-service
           predicates:
             - Path=/auth/**
 
@@ -22,6 +22,11 @@ spring:
           uri: lb://admin-service
           predicates:
             - Path=/admin/**
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/orders/**
 
 eureka:
   client:
