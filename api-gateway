@@ -8,25 +8,63 @@ spring:
   cloud:
     gateway:
       routes:
+        # --- Auth Service ---
         - id: auth-service
           uri: lb://auth-service
           predicates:
             - Path=/auth/**
 
+        # --- Catalog Service ---
         - id: catalog-service
           uri: lb://catalog-service
           predicates:
             - Path=/products/**
             
+        # --- Admin Service ---
         - id: admin-service
           uri: lb://admin-service
           predicates:
             - Path=/admin/**
 
+        # --- Order Service ---
         - id: order-service
           uri: lb://order-service
           predicates:
             - Path=/orders/**
+
+        # --- Swagger/OpenAPI Documentation Routes ---
+        - id: auth-swagger
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/v3/api-docs
+
+        - id: catalog-swagger
+          uri: lb://catalog-service
+          predicates:
+            - Path=/products/v3/api-docs
+
+        - id: admin-swagger
+          uri: lb://admin-service
+          predicates:
+            - Path=/admin/v3/api-docs
+
+        - id: order-swagger
+          uri: lb://order-service
+          predicates:
+            - Path=/orders/v3/api-docs
+
+# Central Swagger UI Configuration
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Auth Service
+        url: /auth/v3/api-docs
+      - name: Catalog Service
+        url: /products/v3/api-docs
+      - name: Admin Service
+        url: /admin/v3/api-docs
+      - name: Order Service
+        url: /orders/v3/api-docs
 
 eureka:
   client:
