@@ -33,43 +33,41 @@ spring:
           predicates:
             - Path=/admin/**
 
-        # 🔥 SWAGGER DOC ROUTES
+        # 🔥 SWAGGER DOC ROUTES (CORRECTLY PLACED)
 
-        # 🔥 SWAGGER DOC ROUTES (FIXED)
+        - id: auth-docs
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/v3/api-docs/**
+          filters:
+            - StripPrefix=1
 
-# 🔥 FIXED SWAGGER ROUTES
+        - id: catalog-docs
+          uri: lb://catalog-service
+          predicates:
+            - Path=/catalog/v3/api-docs/**
+          filters:
+            - StripPrefix=1
 
-- id: auth-docs
-  uri: lb://auth-service
-  predicates:
-    - Path=/auth/v3/api-docs/**
-  filters:
-    - StripPrefix=1
+        - id: order-docs
+          uri: lb://order-service
+          predicates:
+            - Path=/order/v3/api-docs/**
+          filters:
+            - StripPrefix=1
 
-- id: catalog-docs
-  uri: lb://catalog-service
-  predicates:
-    - Path=/catalog/v3/api-docs/**
-  filters:
-    - StripPrefix=1
+        - id: admin-docs
+          uri: lb://admin-service
+          predicates:
+            - Path=/admin/v3/api-docs/**
+          filters:
+            - StripPrefix=1
 
-- id: order-docs
-  uri: lb://order-service
-  predicates:
-    - Path=/order/v3/api-docs/**
-  filters:
-    - StripPrefix=1
-
-- id: admin-docs
-  uri: lb://admin-service
-  predicates:
-    - Path=/admin/v3/api-docs/**
-  filters:
-    - StripPrefix=1
-
-# 🔥 CENTRAL SWAGGER UI CONFIG
+# 🔥 SWAGGER UI CONFIG (ONLY ONCE)
 
 springdoc:
+  api-docs:
+    enabled: true
   swagger-ui:
     config-url: /v3/api-docs/swagger-config
     urls:
@@ -81,6 +79,3 @@ springdoc:
         url: /order/v3/api-docs
       - name: Admin Service
         url: /admin/v3/api-docs
-springdoc:
-  api-docs:
-    enabled: true
