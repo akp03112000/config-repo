@@ -37,33 +37,35 @@ spring:
 
         # 🔥 SWAGGER DOC ROUTES (FIXED)
 
+# 🔥 FIXED SWAGGER ROUTES
+
 - id: auth-docs
   uri: lb://auth-service
   predicates:
-    - Path=/auth/v3/api-docs
+    - Path=/auth/v3/api-docs/**
   filters:
-    - RewritePath=/auth/(?<segment>.*), /${segment}
+    - StripPrefix=1
 
 - id: catalog-docs
   uri: lb://catalog-service
   predicates:
-    - Path=/catalog/v3/api-docs
+    - Path=/catalog/v3/api-docs/**
   filters:
-    - RewritePath=/catalog/(?<segment>.*), /${segment}
+    - StripPrefix=1
 
 - id: order-docs
   uri: lb://order-service
   predicates:
-    - Path=/order/v3/api-docs
+    - Path=/order/v3/api-docs/**
   filters:
-    - RewritePath=/order/(?<segment>.*), /${segment}
+    - StripPrefix=1
 
 - id: admin-docs
   uri: lb://admin-service
   predicates:
-    - Path=/admin/v3/api-docs
+    - Path=/admin/v3/api-docs/**
   filters:
-    - RewritePath=/admin/(?<segment>.*), /${segment}
+    - StripPrefix=1
 
 # 🔥 CENTRAL SWAGGER UI CONFIG
 
