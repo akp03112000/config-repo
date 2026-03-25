@@ -69,6 +69,7 @@ spring:
 
 springdoc:
   swagger-ui:
+    config-url: /v3/api-docs/swagger-config
     urls:
       - name: Auth Service
         url: /auth/v3/api-docs
@@ -78,3 +79,6 @@ springdoc:
         url: /order/v3/api-docs
       - name: Admin Service
         url: /admin/v3/api-docs
+springdoc:
+  api-docs:
+    enabled: true
